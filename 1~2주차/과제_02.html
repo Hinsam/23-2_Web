@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>테이블</title>
+    <style>
+    table{
+        height: 180px;
+    }
+    td{
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        vertical-align: text-top;
+    }
+
+     tr:nth-child(n) td {background-color: rgb(231, 239, 246);}
+     tr:nth-child(2n) td {background-color: rgb(203, 222, 236);}
+     tr:nth-child(1) td {background-color: rgb(0, 154, 203);}
+    </style>
+</head>
+<body>
+    <table>
+        <caption style="caption-side: bottom;">Table Caption</caption>
+        <colgroup>
+            <col style= "width: 140px;">
+            <col style= "width: 140px;">
+            <col style= "width: 140px;">
+            <col style= "width: 140px;">            
+        </colgroup>
+        
+        <tbody>
+            <tr>
+                <td colspan="2" rowspan="2" style="border-bottom: 1.5px solid white;"></td>
+                <td colspan="2" style="color: white; font-weight: normal; border-bottom: 1.5px solid white;">Preference</td>
+            </tr>
+            <tr>
+                <td style="border-left: 1.5px solid white">Preference1</td>
+                <td>Preference2</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Gender</td>
+                <td>Male</td>
+                <td>73%</td>
+                <td>27%</td>
+            </tr>
+            <tr>
+                <td>Female</td>
+                <td>16%</td>
+                <td>84%</td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
