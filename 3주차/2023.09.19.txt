@@ -1,0 +1,15 @@
+preference
+preference1 2
+gender
+male female
+-> 얘들은 다 제목
+나머지 값들은 값
+
+페이지 내에서 특정한 링크를 이용하고 싶을 때에는
+id 속성을 이용한다.
+a태그는 누구나 사용 가능
+
+global attributes 모든 element에서 사용할 수 있는 속성
+title 속성?, 있을 때와 없을 때의 차이
+
+div를 보고 용도를 알 수 없기 때문에 사용 x

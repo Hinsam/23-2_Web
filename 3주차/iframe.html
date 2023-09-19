@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+ 
+    <title>iframe을 가지는 웹 페이지</title>
+</head>
+<body>
+    <iframe src="iframe1.html" width="200" height="150">
+    </iframe>
+    <iframe src = "iframe2.html" width ="200" height="100" 
+    srcdoc=" <html><head><body>hello<body><head></html>">
+    <!-- srcodc 속성이 있으면 src 속성은 무시된다.
+    따라서 iframe2.html 의 내용이 출력되는 것이 아닌 hello 가 출력됨 -->
+    </iframe>
+</body>
+</html>
