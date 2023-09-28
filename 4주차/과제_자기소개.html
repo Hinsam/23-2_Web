@@ -12,9 +12,36 @@
         .container {
             background-color: RGB(245,249,250);
             color : RGB(4,54,86);
-            width:100%;
-            height: 1800px;
+            height: 2300px;
+            width: 90%; 
+            float: right;
         } 
+        .nav_contain{
+            background-color: RGB(4,57,86);
+            height: 2000px;
+            
+            width: 10%; 
+            position: fixed;
+            top: 0px; 
+           left: 8px;
+        }
+
+        nav ul {
+           list-style-type: none;
+           padding: 50px;
+           padding-top: 50px
+        }
+
+        nav li {
+           display: block;
+           margin-bottom: 50px; 
+        }
+
+        nav a {
+          color: white; 
+          text-decoration: none;
+        }
+
         .container h3 {
         padding-top: 50px;
         margin-bottom: 20px; 
@@ -24,24 +51,27 @@
             line-height: 1.5;
         }
         footer{
+            clear: both;
             background-color: RGB(146,192,201);
             width: 100%;
             height: 100px;
             position: relative;
             bottom: 0;
         }
+        
     </style>
 </head>
 <body>
     <header>
-        <h1 style="text-align: left ;padding-left: 50px;">자기소개서</h1>
+        <h1 style = "padding-right: 1200px;">자기소개서</h1>
 
     </header>
+
 
     <section class="container">
 
         <ol type="I">
-            <li>
+            <section id="section1"><li>
                 <h3 style="padding-top: 50px;">성장과정</h3>
                 <ol type="1">
                     <li><h4>어린 시절부터 고등학생 시절까지</h4></li>
@@ -65,8 +95,8 @@
                         <li>그 전까지 어학 자격증과 알고리즘 같은 기본적 능력 함양에 힘쓰고자 한다.</li>
                     </ul>
                 </ol>
-            </li>
-            <li>
+            </li></section>
+            <section id="section2"><li>
                 <h3>성격</h3>
                 <ol type="1">
                     <li><h4>긍정적인 부분</h4></li>
@@ -80,8 +110,8 @@
                         <li>열정적으로 나서서 활동하기 보단, 수동적인 경향이 강한 편이다.</li>
                     </ul>
                 </ol>
-            </li>
-            <li>
+            </li></section>
+            <section id="section3"><li>
                 <h3>취미</h3>
                 <ol type="1">
                     <li><h4>유튜브</h4></li>
@@ -93,9 +123,14 @@
                     <li><h4>미술, 창작활동</h4></li>
                     <ul>
                         <li>가끔 머리가 복잡해질 때면 수채화를 통해 그림을 그리면 <br>속이 차분해지고 맑아지는 효과가 있다. 중학교 때부터 유구하게 지켜오는 취미이다.</li>
+                        <img src="부채.jpg" alt="수채화" width="300px" height="200px" style="margin-top: 10px;">
+                        <img src="나무2.jpg" alt="그림" width="320px" height="200px">
 
+                        <br><br>
                         <li>분기마다 미술관에 방문하여 예술과 문화에 대한 최근의 스타일과 시대를 탐색한다. <br>작가마다 다른 예술적인 감성을 비교하며 보는 것이 은근 재미지다. </li>
-                        
+                        <img src="미술관.jpg" alt="미술관" width="320px" height="200px" style="margin-top: 10px;">
+                        <img src="이응노.jpg" alt="미술관2" width="320px" height="200px" style="margin-top: 10px;">
+
                     </ul>
                     <li><h4>여행</h4></li>
                     <ul>
@@ -104,8 +139,8 @@
                         
                     </ul>
                 </ol>
-            </li>
-            <li>
+            </li></section>
+            <section id="section4"><li>
                 <h3>고민</h3>
                 <ol type="1">
                     <li><h4>진로에 관한 고민</h4></li>
@@ -114,11 +149,22 @@
                             <br>뭐를 공부해야 할 지도, 뭐부터 공부해야 할 지도 길을 잘 모르겠는 것이 조금 많이 혼란스럽다.</li>
                     </ul>
                 </ol>
-            </li>
+            </li></section>
         </ol>
     </section>
+
+    <nav class="nav_contain">
+        <ul>
+            <li><a href="#section1">성장과정</a></li>
+            <li><a href="#section2">성격</a></li>
+            <li><a href="#section3">취미</a></li>
+            <li><a href="#section4">고민</a></li>
+        </ul>
+    </nav>
+
     <footer>
-        <a href="./과제_메인" style="padding: 20px;">메인 페이지로 이동</a>
+        <br>
+        <a href="./과제_메인.html" style="padding: 20px;">메인 페이지로 이동</a>
     </footer>
 </body>
 </html>

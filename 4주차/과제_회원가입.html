@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 폼</title>
+
+    <style>
+        header {
+            background-color: white;
+            color : RGB(4,54,86);
+            text-align: center;
+        }   
+        section {
+            background-color: RGB(245,249,250);
+            color : RGB(4,54,86);
+            width:100%;
+            height: 800px;
+        }
+        form{
+            padding-left: 30px;
+        }
+        fieldset{
+            width: 400px;
+            height: 530px;
+            margin: 0 auto; 
+            margin-top: 70px;
+
+        }
+        footer{
+            background-color: RGB(146,192,201);
+            width: 100%;
+            height: 150px;
+            position: relative;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h2 style="text-align: left ;padding-left: 30px;">회원가입</h2>
+        
+    </header>
+    <section>
+        <br>
+        <form name = "fo" method ="get">
+            <fieldset>
+                <legend> 회원 정보 </legend>
+                <br>
+                <label>사용자 ID: <input type ="text" size ="" value = ""></label>
+                <br><br>
+                 <label for="pass">비밀번호 : </label>
+                 <input id="pass" type="password" value="" maxlength="15">
+                 <br><br><br><hr><br><br>
+                 이름: <input style="margin-left: 37px;" type="text" maxlength="4">
+                 <br><br>
+                 생년월일 : <input style = "padding-right: 56px;"type = "date">
+                 <br><br>
+                 전화번호 : <input  placeholder="010-0000-0000" type = "tel">
+                 <br><br>
+                 E-Mail : <input  style = "padding-right: 6px; margin-left: 17px;" type = "email" placeholder="id@host">
+                 <br><br>
+                 성별: <input style = "margin-left: 37px;" type="text" list="성별"><br>
+                     <datalist id = "성별">
+                         <option value ="남자">
+                         <option value ="여자">
+                         </datalist>
+                <br><br>  
+                <input type ="submit" value = "완료">       
+            </fieldset>
+           
+        </form>
+        
+    </section>
+    <footer>
+        <br>
+<a href="./과제_메인.html" style="padding: 20px;">메인 페이지로 이동</a>
+</footer>
+</body>
+</html>
