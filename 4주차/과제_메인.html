@@ -23,7 +23,7 @@
             background-color: RGB(245,249,250);
             color : RGB(4,54,86);
             width:100%;
-            height: 1000px;
+            height: 800px;
 
             display: flex;
             justify-content: center;
@@ -42,6 +42,15 @@
             image-rendering:-webkit-optimize-contrast;
             transform:translateZ(0);
             backface-visibility:hidden;
+        }
+
+        .add{
+            background-color: RGB(245,249,250);
+            color : RGB(4,54,86);
+            width:100%;
+            height: 800px;
+            text-align: center;
+
         }
         footer{
             background-color: RGB(146,192,201);
@@ -73,7 +82,27 @@
       </section>
     </section>
 
+    <section class = "add">
+        <br><br>
+        <h2 style="padding-top: 15px;">사용언어
+    </section>
     <footer>
     </footer>
+
+    <script>
+        let isScrollDown = true;
+
+        window.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === "enter") {
+                if (isScrollDown) {
+                    document.querySelector(".add").scrollIntoView({ behavior: "smooth" });
+                } else {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+                isScrollDown = !isScrollDown;
+            }
+        });
+    </script>
+
 </body>
 </html>

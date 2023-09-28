@@ -1,0 +1,38 @@
+[css]
+block 늘 새 줄부터
+inline 이어서 
+margin 앞에서 바로 시작하지 않고 좀 들어가서
+
+css 1. 선택자 2. 선언부 로 나뉜다
+선언은 중괄호, 선택자는 여러가지
+
+1. type selector
+h1, h2, h3 {font-family: sans-serif} -> 모두 적용
+h1 em {color: blue;} h1 의 자손들 중 어디엔가 em이 있다하면 걔는 이걸로
+div ol > li p 얘는 자식임. div 자손 중에 ol ol의 자식 중에 li, li의 자손 중에 p에 대해 적용해줘
+
+html - head와 body를 가짐
+웹 문서는 부모 자식 간 관계로 표현이 되어 있음 -> 트리
+웹 문서의 트리 구성 -> Dom 트리
+
+2. attribute selector
+[att]
+[att=val]
+[att~!=val]
+a[href="http://www.w3.org/"]
+h1[title]{color:blue;} h1 중에 title 이라는 속성이 있는 것에만 대해 블루 색으로
+
+3. class selector
+클래스는 .
+
+4. ID selector 
+아이디는 #, 하나만 와야행
+#para {text-align:center; margin-left: 1cm;}
+
+
+[selector]
+스타일의 상속
+부모 태그로부터 상속
+부모와 내 것 중에, 상속을 받을 수 있다. 그러나 개인 것이 있다면 내 것을 씀
+
+pseudo selector 가상 클래스 셀렉터
