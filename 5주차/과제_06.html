@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>과제_06 약수구하기</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Gaegu', cursive; }
+    </style>
+    
+    <script>
+       function Divisors(){
+        x = prompt("양의 정수를 입력하세요.", 1);
+
+        if(isNaN(parseInt(x))){
+            alert("숫자를 입력해주세요.");
+            return;
+        }
+        if(x>100 || x<1){
+            alert("숫자는 100 이하 1 이상의 값이어야 합니다.")
+            return;
+        }
+        var resultsDiv = document.getElementById("division");
+        resultsDiv.innerHTML = '';
+
+        for(i=1; i<=x; i++){
+            if(x%i==0){
+                resultsDiv.innerHTML += x + "의 약수는: " + i + "<br>";
+            }
+        }
+       }
+    </script>
+</head>
+<body>
+    <form>
+        <input type = button value = "약수 구하기" onclick="Divisors()" style="width: 140px; height: 70px; font-size: 20px;">
+    </form>
+    <section id = "division" style="padding-top: 20px; font-size: 20px;"></section>
+</body>
+</html>
