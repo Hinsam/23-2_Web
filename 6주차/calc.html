@@ -76,38 +76,77 @@ button:focus {
 }
 </style>
 <script>
+  // 두 번째 이상 기능 시
+    var pass = true;
+
     function reset(){
         document.getElementById("result").value = "";
-        document.getElementById("before").value = "0";
-    }
-    function calc(){
-
-        
+        document.getElementById("before").value = "";
     }
     
     function addToDisplay(n) {
-        var res = document.getElementById("result").value;
+    // "result"와 "before" 입력 필드의 값을 가져옵니다.
+    var res = document.getElementById("result").value;
+    var bef = document.getElementById("before").value;
 
-        //사용자가 계속해서 연산을 수행할 때
-        //1. = 클릭 후 숫자 클릭 -> 초기화
-        //2. = 클릭 후 연산자 클릭 -> 이어하기
-        //사용자가 처음 계산할 때
-        //1. 만약 연산자가 맨 처음으로 나오면 -> 빠꾸
-        //2. 숫자가 나오면 숫자
-        
-        //1. 연산자가 두 개 나오면-> 빠꾸
-        document.getElementById("result").value += n;
+    // 완전 초기상태
+    if (bef == "" && res == "" && (n == '%' || n == '*' ||n == '+' || n == '-' || n == '/')) {
+        alert("숫자를 먼저 입력해주세요.");
+        return; } 
+    // 초기상태에서 . 입력 시
+    else if(bef=="" && res=="" && n=='.'){
+      document.getElementById("result").value += (0+n);
+      return;
     }
+
+    // bef 에는 내용이 있는 상태에서 숫자를 누를 경우
+    var num = res.length;
+    if(bef !="" && pass==false && !(n == '%' || n == '*' ||n == '+' || n == '-' || n == '/' || n == '.') ){reset();}
+    else if(bef !="" && pass==false && n=='.'){
+      pass = true;
+      reset();
+      document.getElementById("result").value = (0+n);
+      return;
+    }
+    pass = true;
+
+    // 연산자가 두 번 나왔을 경우
+    if(res.length>1)
+    {
+      if((res[num-1] == '%' || res[num-1] == '*' ||res[num-1] == '+' || res[num-1] == '-' || res[num-1] == '/' || res[num-1] =='.')&&
+      (n == '%' || n == '*' ||n == '+' || n == '-' || n == '/' || n == '.')){
+        back();}
+    }
+
+    //.을 누를 경우
+
+    //계산
+    if(n=='='){
+      calculate();
+      return;
+    }
+
+    document.getElementById("result").value += n;}
+
     function back(){
+      var res = document.getElementById("result").value;
+      if (res.length > 0) {
+          document.getElementById("result").value = res.substring(0, res.length - 1);
+     }}
 
-    }
+     function calculate(){
+      pass = false;
+      var res = document.getElementById("result").value;
+      document.getElementById("result").value = eval(res);
+      document.getElementById("before").value = res;
+     }
 
 </script>
 </head>
 <body>
   <section class="calculator">
-    <input type="text" id="before" value = "0" readonly/>
-    <input type="text" id="result"/>
+    <input type="text" id="before" value="" readonly/>
+    <input type="text" id="result" value=""/>
     <table>
       <thead>
         <tr>
@@ -126,7 +165,7 @@ button:focus {
             <button type="button" class="operator" onclick="addToDisplay('%')">%</button>
           </td>
           <td>
-            <button type="button" class="operator" onclick="addToDisplay('÷')">÷</button>
+            <button type="button" class="operator" onclick="addToDisplay('/')">÷</button>
           </td>
           <td>
             <button type="button" onclick="back()">〈</button>
@@ -143,7 +182,7 @@ button:focus {
             <button type="button" onclick="addToDisplay('9')">9</button>
           </td>
           <td>
-            <button type="button"  class="operator" onclick="addToDisplay('*')">X</button>
+            <button type="button"  class="operator" onclick="addToDisplay('*')">x</button>
           </td>
         </tr>
         <tr>
@@ -182,7 +221,7 @@ button:focus {
             <button type="button" onclick="addToDisplay('.')">.</button>
           </td>
           <td>
-            <button type="button" onclick="calc()">=</button>
+            <button type="button" onclick="addToDisplay('=')">=</button>
           </td>
         </tr>
       </tbody>

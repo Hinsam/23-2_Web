@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SongList</title>
+    <style>
+        @font-face {
+            font-family: 'Dovemayo_gothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Dovemayo_gothic';
+        }
+        body{
+            background: linear-gradient(to bottom, #7e95c4 0%, #FFF0F5);
+            height: 100vh;
+            width: 100%;
+        }
+
+        .wrapper {
+            margin: 120px auto;
+            max-width: 700px;
+            width: 100%;
+            background: rgb(239, 244, 255);
+            padding: 25px;
+            border-radius: 3px;
+        }
+
+        .wrapper header {
+            margin-bottom: 30px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .wrapper .inputField {
+            display: flex;
+            margin: 5px auto 20px;
+            height: 45px;
+            width: 700px;
+        }
+
+        .inputField input {
+            padding-left: 15px;
+            height: 100%;
+            border: none;
+            font-size: 15px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .inputField button {
+            width: 50px;
+            height: 100%;
+            border: none;
+            border-radius: 3px;
+            background: rgb(6, 6, 6);
+            cursor: pointer;
+        }
+
+        .wrapper .SongList {
+            display: flex;
+        }
+
+        .SongList li {
+            width: 640px;
+            list-style: none;
+            line-height: 40px;
+            position: relative;
+            margin-bottom: 9px;
+            text-indent: 15px;
+            background: rgb(255, 255, 255);
+            border-radius: 3px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .wrapper .footer {
+            font-weight: 600;
+            text-indent: 15px;
+            display: flex;
+            width: 100%;
+            margin-top: 30px;
+            justify-content: right;
+        }
+
+        .footer button {
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 900;
+            padding: 6px 10px;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 9px;
+            background: rgb(6, 6, 6);
+        }
+    </style>
+</head>
+<body>
+    <section class="wrapper">
+        <header>PlayList</header>
+        <section class="inputField">
+            <input type="text" id="addValue_Singer" placeholder="가수"
+                style="width: 200px; margin-right: 10px; margin-left: -6px;" autofocus />
+            <input type="text" id="addValue" placeholder="노래" style="width: 400px;" autofocus />
+            <button type="button" id="btn" onclick="addSong()"></button>
+        </section>
+        <section>
+            <ul id="addTodo" class="SongList">
+                <li>
+                    <section id='result'>
+
+                    </section>
+                </li>
+            </ul>
+        </section>
+        <section class="footer">
+            <button type="button" id="allClear" onclick="allClearList()">모두 삭제</button>
+        </section>
+    </section>
+    <script>
+        const btn = document.getElementById('btn');
+        let addValue = document.getElementById('addValue');
+        let result = document.getElementById('result');
+
+        function addSong() {
+            if (addValue.value == false) { /*''가능 */
+                alert('내용을 입력하세요!');
+            } else {
+                let list = document.createElement("li");
+                let del = document.createElement('button');
+                list.innerHTML = addValue_Singer.value + " - " + addValue.value;
+                result.appendChild(list); 
+                list.appendChild(del);   
+
+                del.innerText = "x";    
+                del.style.background = "white";
+                del.style.fontSize = "20px";
+                del.style.border = "none";
+                del.style.float = "right";
+                del.style.right = "15px";
+                del.style.marginTop = "10px";
+                del.style.cursor = "pointer";
+                del.addEventListener("click", deleteList); 
+                del.style.position = 'relative';
+
+                addValue.value = "";                          
+                addValue_Singer.value = "";   
+                addValue_Singer.focus();                           
+            }
+        }
+        function deleteList(e) { 
+            let removeOne = e.target.parentElement;  
+            removeOne.remove();
+        }
+        // //모두 삭제시
+        function allClearList(e) {
+            if (confirm("정말 삭제하시겠습니까?") == true) { 
+                if (result.innerText == '') {                     
+                    alert("삭제할 목록이 없습니다");            
+                } else {                                     
+                    result.innerText = '';                   
+                }
+            } else {                                     
+                return false;                      
+            }
+        }
+    </script>
+</body>
+
+</html>
