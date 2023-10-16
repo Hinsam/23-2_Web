@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>SongList</title>
+    <style>
+        @font-face {
+            font-family: 'Dovemayo_gothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Dovemayo_gothic';
+        }
+        body{
+            background: linear-gradient(to bottom, #7e95c4 0%, #FFF0F5);
+            height: 100vh;
+            width: 100%;
+        }
+
+        .wrapper {
+            margin: 120px auto;
+            max-width: 700px;
+            width: 100%;
+            background: rgb(239, 244, 255);
+            padding: 25px;
+            border-radius: 3px;
+        }
+
+        .wrapper header {
+            margin-bottom: 30px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .wrapper .inputField {
+            display: flex;
+            margin: 5px auto 20px;
+            height: 45px;
+            width: 700px;
+        }
+
+        .inputField input {
+            padding-left: 15px;
+            height: 100%;
+            border: none;
+            font-size: 15px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .inputField button {
+            width: 50px;
+            height: 100%;
+            border: none;
+            border-radius: 3px;
+            background: rgb(6, 6, 6);
+            cursor: pointer;
+        }
+
+        .wrapper .SongList {
+            display: flex;
+            flex-direction: column; /* Added this to display the song list vertically */
+        }
+
+        .SongList li {
+            width: 640px;
+            list-style: none;
+            line-height: 40px;
+            position: relative;
+            margin-bottom: 9px;
+            text-indent: 15px;
+            background: rgb(255, 255, 255);
+            border-radius: 3px;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between; /* Added this to align the delete button */
+        }
+
+        .wrapper .footer {
+            font-weight: 600;
+            text-indent: 15px;
+            display: flex;
+            width: 100%;
+            margin-top: 30px;
+            justify-content: flex-end; /* Changed to 'flex-end' for button alignment */
+        }
+
+        .footer button {
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 900;
+           padding: 6px 10px;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 9px;
+            background: rgb(6, 6, 6);
+        }
+    </style>
+</head>
+<body>
+    <section class="wrapper">
+        <header>PlayList</header>
+        <section class="inputField">
+            <input type="text" id="addValue_Singer" placeholder="가수" style="width: 200px; margin-right: 10px; margin-left: -6px;" autofocus />
+            <input type="text" id="addValue" placeholder="노래" style="width: 400px;" autofocus />
+            <button type="button" id="btn" onclick="addSong();"></button> 
+        </section>
+        <section>
+            <ul id="add" class="SongList">
+
+            </ul>
+        </section>
+        <section class="footer">
+            <button type="button" id="allClear" onclick="allClearList()">모두 삭제</button>
+        </section>
+    </section>
+    <script>
+        // 페이지가 로드될 때 노래 목록을 로컬 스토리지에서 가져옵니다.
+        const songList = JSON.parse(localStorage.getItem('songList')) || [];
+
+        // 노래 목록을 화면에 표시하는 함수
+        function displaySongList() {
+            const add = document.getElementById('add');
+            add.innerHTML = '';
+
+            songList.forEach((song, index) => {
+                let list = document.createElement("li");
+                list.innerHTML = song;
+                add.appendChild(list);
+
+                let del = document.createElement('button');
+                del.innerText = "x";
+                del.style.background = "white";
+                del.style.fontSize = "20px";
+                del.style.border = "none";
+                del.style.cursor = "pointer";
+                del.style.marginRight = "10px";
+                del.addEventListener("click", () => deleteSong(index));
+                list.appendChild(del);
+            });
+        }
+
+        // 노래를 추가하는 함수
+        function addSong() {
+            const addValue_Singer = document.getElementById('addValue_Singer');
+            const addValue = document.getElementById('addValue');
+
+            if (addValue.value == '') {
+                alert('내용을 입력하세요!');
+            } else {
+                const song = addValue_Singer.value + " - " + addValue.value;
+                songList.push(song);
+                saveSongList();
+                displaySongList();
+                addValue.value = "";
+                addValue_Singer.value = "";
+            }
+        }
+
+        // 노래를 삭제하는 함수
+        function deleteSong(index) {
+            songList.splice(index, 1);
+            saveSongList();
+            displaySongList();
+        }
+
+        // 모든 노래를 삭제하는 함수
+        function allClearList() {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                songList.length = 0; // 노래 목록 초기화
+                saveSongList();
+                displaySongList();
+            }
+        }
+
+        // 로컬 스토리지에 노래 목록을 저장하는 함수
+        function saveSongList() {
+            localStorage.setItem('songList', JSON.stringify(songList));
+        }
+
+        // 페이지가 로드될 때 노래 목록을 화면에 표시
+        displaySongList();
+    </script>
+</body>
+</html>

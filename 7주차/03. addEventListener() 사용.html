@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        var obj_p;
+        function init(){
+            obj_p = document.getElementById("my_p");
+            obj_p.addEventListener("mouseover", over);
+            obj_p.addEventListener("mouseout", out); // 이벤트 리스너 등록
+        }
+        function over(){
+            obj_p.style.backgroundColor = "orchid";
+        }
+        function out(){
+            obj_p.style.backgroundColor = "white";
+        }
+    </script>
+</head>
+
+ <!-- onload 웹 페이지가 로딩을 완료할 때 init() 함수가 호출되도록 지정 -->
+<body onload = "init()">
+    <p id = "my_p">마우스 올리면 색 변경_3</p>
+</body>
+</html>
