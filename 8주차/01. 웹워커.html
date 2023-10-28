@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>Ping Pong</title>
+    <meta charset="utf-8">
+    <script>window.onload = function () {
+            var worker = new Worker("worker.js");
+            worker.postMessage("ping");
+            worker.onmessage = function (event) {
+                var msg = "Worker says " + event.data;
+                alert(msg);
+                document.getElementById("output").innerHTML = msg;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p id="output">
+    </p>
+</body>
+
+</html>
