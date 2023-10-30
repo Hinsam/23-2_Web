@@ -15,7 +15,7 @@ wordList.forEach(item => {
     extractedWords.push(word);
 });
 
-const token = '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';
+const token = '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';
 const get_gpt = document.getElementById('result_word');
 let resultText = '';
 
