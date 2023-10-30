@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>wordList</title>
+    <style>
+        @font-face {
+            font-family: 'Dovemayo_gothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Dovemayo_gothic';
+        }
+
+        body {
+            background: #EBEFF2;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .wrapper {
+            margin: 120px auto;
+            max-width: 700px;
+            width: 100%;
+            background: #8198A6;
+            padding: 25px;
+            border-radius: 3px;
+        }
+
+        .wrapper header {
+            margin-bottom: 30px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .wrapper .inputField {
+            display: flex;
+            margin: 5px auto 20px;
+            height: 45px;
+            width: 700px;
+        }
+
+        .inputField input {
+            padding-left: 15px;
+            height: 100%;
+            border: none;
+            font-size: 15px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .inputField button {
+            width: 50px;
+            height: 100%;
+            border: none;
+            border-radius: 3px;
+            background: #4C5C6B;
+            cursor: pointer;
+        }
+
+        .wrapper .wordList {
+            display: flex;
+            flex-direction: column;
+            /* Added this to display the word list vertically */
+        }
+
+        .wordList li {
+            width: 640px;
+            list-style: none;
+            line-height: 40px;
+            position: relative;
+            margin-bottom: 9px;
+            text-indent: 15px;
+            background: rgb(255, 255, 255);
+            border-radius: 3px;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            /* Added this to align the delete button */
+        }
+
+        .wrapper .footer {
+            font-weight: 600;
+            text-indent: 15px;
+            display: flex;
+            width: 100%;
+            margin-top: 30px;
+            justify-content: flex-end;
+            /* Changed to 'flex-end' for button alignment */
+        }
+
+        .footer button {
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 900;
+            padding: 6px 10px;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 9px;
+            background: #333E48;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 30px;
+            height: 100%;
+            background: #333E48;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        .sidebar:hover {
+            width: 600px;
+        }
+
+        #Dictonary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 사이드바 -->
+    <section class="sidebar">
+        <section style="width: 30px; height: 100%; float: left;">
+        </section>
+        <section style="height: 100%;">
+            <iframe id="Dictonary" src="https://en.dict.naver.com/#/main"></iframe>
+        </section>
+    </section>
+
+    <section class="wrapper">
+        <section class="inputField">
+            <input type="text" id="addValue_word" placeholder="단어"
+                style="width: 300px; margin-right: 10px; margin-left: -6px;" autofocus />
+            <input type="text" id="addValue_mean" placeholder="뜻" style="width: 300px;" autofocus />
+            <button type="button" id="btn" onclick="addWord();"></button>
+        </section>
+        <section>
+            <ul id="add" class="wordList">
+
+            </ul>
+        </section>
+        <section class="footer">
+            <button type=" button" id = "sentence" onclick="openVocabularyListPage()" style="width: 80px; margin-right: 20px;">예문</button>
+            <button type="button" id="allClear" onclick="allClearList()">Delete</button>
+        </section>
+    </section>
+
+
+    <script>
+        // 페이지가 로드될 때 단어 목록을 로컬 스토리지에서 가져옵니다.
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('vocabularyList');
+        const wordList = JSON.parse(localStorage.getItem(id)) || [];
+
+        // 단어 목록을 화면에 표시하는 함수
+        function displayWordlist() {
+            const add = document.getElementById('add');
+            add.innerHTML = '';
+
+            wordList.forEach((word, index) => {
+                let list = document.createElement("li");
+                list.innerHTML = word;
+                add.appendChild(list);
+
+                let del = document.createElement('button');
+                del.innerText = "x";
+                del.style.background = "white";
+                del.style.fontSize = "20px";
+                del.style.border = "none";
+                del.style.cursor = "pointer";
+                del.style.marginRight = "10px";
+                del.addEventListener("click", () => deleteWord(index));
+                list.appendChild(del);
+            });
+        }
+
+        // 단어를 추가하는 함수
+        function addWord() {
+            const addValue_word = document.getElementById('addValue_word');
+            const addValue_mean = document.getElementById('addValue_mean');
+
+            if (addValue_mean.value == '') {
+                alert('내용을 입력하세요!');
+            } else {
+                const word = addValue_word.value + " <br> &nbsp;&nbsp;&nbsp;" + addValue_mean.value;
+                wordList.push(word);
+                saveWordList();
+                displayWordlist();
+                addValue_mean.value = "";
+                addValue_word.value = "";
+            }
+        }
+
+        // 단어를 삭제하는 함수
+        function deleteWord(index) {
+            wordList.splice(index, 1);
+            saveWordList();
+            displayWordlist();
+        }
+
+        // 모든 단어를 삭제하는 함수
+        function allClearList() {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                wordList.length = 0; // 노래 목록 초기화
+                saveWordList();
+                displayWordlist();
+            }
+        }
+
+        // 로컬 스토리지에 단어 목록을 저장하는 함수
+        function saveWordList() {
+            localStorage.setItem(id, JSON.stringify(wordList));
+        }
+
+        // 페이지가 로드될 때 노래 목록을 화면에 표시
+        displayWordlist();
+
+        //이동함수
+        function openVocabularyListPage() {
+            const newPageURL = `./mid-sentence.html?vocabularyList=${encodeURIComponent(JSON.stringify(id))}`;
+            window.location.href = newPageURL;
+        }
+    </script>
+
+</body>
+
+</html>

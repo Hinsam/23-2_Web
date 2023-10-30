@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <span class="word"></span>
+    </section>
+
+    <script>
+        const wordList = JSON.parse(localStorage.getItem('63817')) || [];
+        const extractedWords = [];
+
+
+        wordList.forEach(item => {
+            const parts = item.split('<br> &nbsp;&nbsp;&nbsp;');
+            const word = parts[0].trim();
+            extractedWords.push(word);
+        });
+
+        // 추출된 결과를 확인합니다.
+        const word = document.querySelector(".word");
+        word.innerText = extractedWords;
+    </script>
+</body>
+
+</html>

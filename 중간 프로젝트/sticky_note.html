@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    <title>Sticky Notes</title>
+    <link rel="stylesheet" type="text/css" href="sticky.css">
+</head>
+
+<body>
+    <section class="container">
+        <section class="notes">
+            <section id="create"">
+                <i class="fas fa-plus"></i>
+                <section class="createBox">
+                    <section class="innerCreateBox">
+                        <textarea placeholder="Write Here . . . " id="userInput" maxlength="160"></textarea>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+    <script>
+        let createBox = document.querySelector('.createBox');
+        let notes = document.querySelector('.notes');
+        let input = document.getElementById('userInput');
+        let i = 0;
+
+        window.addEventListener('load', loadNotes);
+
+        document.getElementById("create").addEventListener("click", function () {
+            createBox.style.display = "block";
+        });
+
+        input.addEventListener('keydown', content);
+
+        function content(e) {
+            if (e.key === 'Enter') {
+                sectionStyle(input.value);
+                input.value = "";
+                createBox.style.display = "none";
+            }
+        }
+
+        function color() {
+            let randomColors = ["#204040", "#D9C8A9", "#BF8450", "#8C2626"];
+            if (i > randomColors.length - 1) {
+                i = 0;
+            }
+            return randomColors[i++];
+        }
+
+        function sectionStyle(text) {
+            let section = document.createElement("section");
+            section.className = 'note';
+            section.innerHTML = '<section class = "details">'
+                + '<h3>' + text + '</h3>' + '</section>';
+
+            // Remove note on double click
+            section.addEventListener("dblclick", function () {
+                section.remove();
+                saveNotes();
+            });
+            // Fill random colors in note
+            section.style.background = color();
+
+            notes.appendChild(section);
+            saveNotes();
+        }
+
+        function saveNotes() {
+            const noteElements = document.querySelectorAll('.note');
+            const notesArray = Array.from(noteElements).map(note => note.querySelector('h3').textContent);
+            localStorage.setItem('stickyNotes', JSON.stringify(notesArray));
+        }
+
+        // 노트 로드
+        function loadNotes() {
+            const savedNotes = JSON.parse(localStorage.getItem('stickyNotes'));
+            if (savedNotes) {
+                savedNotes.forEach(note => sectionStyle(note));
+            }
+        }
+    </script>
+</body>
+
+</html>
