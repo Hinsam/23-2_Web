@@ -128,7 +128,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            
+
         }
     </style>
 </head>
@@ -156,7 +156,8 @@
             </ul>
         </section>
         <section class="footer">
-            <button type=" button" id = "sentence" onclick="openVocabularyListPage()" style="width: 80px; margin-right: 20px;">예문</button>
+            <button type=" button" id="sentence" onclick="openVocabularyListPage()"
+                style="width: 80px; margin-right: 20px;">예문</button>
             <button type="button" id="allClear" onclick="allClearList()">Delete</button>
         </section>
     </section>
@@ -175,8 +176,25 @@
 
             wordList.forEach((word, index) => {
                 let list = document.createElement("li");
-                list.innerHTML = word;
+                list.innerHTML = word.text;
                 add.appendChild(list);
+
+                if (word.completed) {
+                    list.style.textDecoration = "line-through";
+                    list.style.color = "gray";
+                }
+
+                list.addEventListener("click", function () {
+                    word.completed = !word.completed;
+                    if (word.completed) {
+                        list.style.textDecoration = "line-through";
+                        list.style.color = "gray";
+                    } else {
+                        list.style.textDecoration = "none";
+                        list.style.color = "black";
+                    }
+                    saveWordList();
+                });
 
                 let del = document.createElement('button');
                 del.innerText = "x";
@@ -198,7 +216,10 @@
             if (addValue_mean.value == '') {
                 alert('내용을 입력하세요!');
             } else {
-                const word = addValue_word.value + " <br> &nbsp;&nbsp;&nbsp;" + addValue_mean.value;
+                const word = {
+                    text: addValue_word.value + " <br> &nbsp;&nbsp;&nbsp;" + addValue_mean.value,
+                    completed: false
+                };
                 wordList.push(word);
                 saveWordList();
                 displayWordlist();
@@ -217,7 +238,7 @@
         // 모든 단어를 삭제하는 함수
         function allClearList() {
             if (confirm("정말 삭제하시겠습니까?")) {
-                wordList.length = 0; // 노래 목록 초기화
+                wordList.length = 0;
                 saveWordList();
                 displayWordlist();
             }
@@ -231,11 +252,12 @@
         // 페이지가 로드될 때 노래 목록을 화면에 표시
         displayWordlist();
 
-        //이동함수
+        // 이동함수
         function openVocabularyListPage() {
             const newPageURL = `./mid-sentence.html?vocabularyList=${encodeURIComponent(JSON.stringify(id))}`;
             window.location.href = newPageURL;
         }
+
     </script>
 
 </body>
