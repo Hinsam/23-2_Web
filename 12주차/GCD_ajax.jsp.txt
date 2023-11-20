@@ -1,0 +1,40 @@
+<!-- GCD_ajax.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// 검색 문자열을 넘겨받지 못하면, 검색을 할 수 없다.
+String num1 = request.getParameter("num1");
+String num2 = request.getParameter("num2");
+
+String result;
+
+int i = Integer.parseInt(num1);
+int j = Integer.parseInt(num2);
+
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("a h시 mm분");
+java.util.Date currentTime = new java.util.Date();
+String time = sdf.format(currentTime);
+
+int gcd = GCD(i, j);
+
+result = String.valueOf(gcd);
+out.print(result);
+%>
+
+<br><br>
+<%= time %> 현재
+<%= ++count %>번 실행되었습니다.
+<%! int count = 0; %>
+
+<%!
+	public int GCD(int num1, int num2){
+		int gcdNum = 0;
+		
+		for(int i=1; i<=num1 && i<=num2; i++){
+			if(num1 % i == 0 && num2 % i == 0){
+				gcdNum = i;
+			}
+		}
+		return gcdNum;
+	}
+%>

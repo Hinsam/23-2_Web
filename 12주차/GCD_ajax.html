@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GCD, LCM 프로그램</title>
+<script>
+    var xmlhttp = false;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.overrideMimeType('text/xml');
+    }
+
+    function Num() {
+        var num1 = document.getElementById('num1').value;
+        var num2 = document.getElementById('num2').value;
+        var url = 'GCD_ajax.jsp?num1=' + num1 + '&num2=' + num2;
+        
+        xmlhttp.open('GET', url, true);
+        xmlhttp.onreadystatechange = getNum;
+        xmlhttp.send(null);
+    }
+
+    function getNum() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById('number').innerHTML = "<br>"+"GCD : " + xmlhttp.responseText;
+        } else {
+            document.getElementById('number').innerHTML = 'Error: preSearch Failed!';
+        }
+    }
+</script>
+</head>
+<body>
+    <h2> GCD, LCM 프로그램 </h2>
+    <form>
+        Num1: <input type="text" id="num1" name="num1"><br>
+        Num2: <input type="text" id="num2" name="num2"><br><br>
+        <button type="button" onclick="Num()">제출</button><br><br>
+    </form>
+    
+    <hr>
+    <section id="number">
+
+    </section>
+    
+</body>
+</html>

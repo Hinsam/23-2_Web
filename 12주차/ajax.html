@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ajax_test3</title>
+    <style>
+        div.elem {
+            margin: 20px;
+        }
+    </style>
+    <script>
+        var xmlhttp = false;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType('text/xml');
+        }
+        function populateList() {
+            var state = document.getElementById('state').value;
+            var url = 'ajax.jsp?state=' + state;
+            xmlhttp.open('GET', url, true);
+            xmlhttp.onreadystatechange = getCities;
+            xmlhttp.send(null);
+        }
+
+        function getCities() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById('cities').innerHTML = "<select>" + xmlhttp.responseText + "</select>";
+            } else {
+                document.getElementById('cities').innerHTML = 'Error: preSearch Failed!';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Select State:</h3>
+    <form action="ajax_proc.jsp" method="get">
+        <div class="elem">
+            <select id="state" onchange="populateList();">
+                <option value="CA">California</option>
+                <option value="MO">Missouri</option>
+                <option value="WA">Washington</option>
+                <option value="ID">Idaho</option>
+            </select>
+        </div>
+        <h3>Cities:</h3>
+        <div class="elem" id="cities">
+            <select></select>
+        </div>
+    </form>
+</body>
+
+</html>
