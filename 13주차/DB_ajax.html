@@ -1,0 +1,78 @@
+<!--DB_ajax.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>증명서 발급 시스템</title>
+    <script>
+    var xmlhttp = false;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.overrideMimeType('text/xml');
+    }
+
+    function Data() {
+        var id = document.getElementById('id').value;
+        var pass = document.getElementById('pass').value;
+        var url = 'DB_ajax.jsp?id=' + id + '&pass=' + pass;
+        
+        xmlhttp.open('GET', url, true);
+        xmlhttp.onreadystatechange = getData;
+        xmlhttp.send(null);
+    }
+
+    function getData() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById('address').innerHTML = "<select>" + xmlhttp.responseText + "</select>";
+            } else {
+                document.getElementById('address').innerHTML = "<select>" + "<option value='no found'>no found</option>" + "</select>";
+            }
+    }
+</script>
+</head>
+<body>
+	<br>
+    <form name="sys" method="post" action="DB_result.jsp">
+        <center>
+            <table cellspacing = "1" cellpadding = "2">
+                <tr bgcolor = "yellow">
+                    <td align = "center" colspan = "2"><b>증명서 발급 시스템</b></td>
+                </tr>
+                <tr>
+                    <td align = "right">학생 아이디 : </td>
+                    <td><input type = "text" id = "id" name ="id"></td>
+                </tr>
+                <tr>
+                    <td align = "right">비밀번호 : </td>
+                    <td><input type = "text" id = "pass" name ="pass"></td>
+                </tr>
+                <tr>
+                    <td align = "right">증명서 : </td>
+                    <td>
+                        <select id = "certification" onchange="Data()" name ="certification">
+							<option style="display:none;" selected disabled>증명서를 선택하세요</option>
+                            <option value = "재학증명서">재학증명서</option>
+                            <option value = "성적증명서">성적증명서</option>
+                            <option value = "졸업증명서">졸업증명서</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align = "right">주소 : </td>
+                    <td>
+                        <select id = "address" name = "address">
+
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            
+            <br>
+            <button type="submit">입력완료</button>
+            <button type="reset">다시쓰기</button>
+        </center>
+    </form>
+    
+</body>
+</html>

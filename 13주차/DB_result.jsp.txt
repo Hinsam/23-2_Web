@@ -1,0 +1,24 @@
+<!--DB_result.jsp-->    
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	String studentId = request.getParameter("id");
+	String certificationType = request.getParameter("certification");
+	String selectedAddress = request.getParameter("address");
+%>
+<h2>증명서 발급</h2><br>
+<p><b>안녕하세요 </b> <%= studentId %> 님</p>
+<p><b></b> <%= certificationType %>를(을)</p>
+<p><b></b> <%= selectedAddress %>로 보내드리겠습니다.</p>
+ 
+ <a href="DB_ajax.html">뒤로 가기</a>
+</body>
+
+</html>

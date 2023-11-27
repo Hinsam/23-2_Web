@@ -1,0 +1,33 @@
+이전에 있던 데이터 공유 - 쿠키를 계속 떨구고 나중에 가져와
+-> 클라이언트 컴퓨터에 떨굼
+기존 데이터 - getParameter
+
+<@session =True>
+? 하나의 연결성을 전제한 후 데이터를 서버 쪽에 떨굼
+
+쿠키는 서버에서 만들어진 작은 정보의 단위
+서버에서 클라이언트의 브라우저로 전송되어 사용자 컴퓨터에 저장 response
+저장된 쿠키는 다시 웹 페이지에 접속할 대, 브라우저에서 서버로 쿠키 전송 request
+
+하나의 쿠키는 4kbytes
+
+Cookie cookie = new Cookie(name, value) 쿠키 저장
+Cookie[] cookies = reqest.getCookies()l 쿠키 조회
+
+세션 클라이언트마다 각기 다른 정보를 서버에 저장하는 것이 세션
+
+자바코드는 실행된 결과가 넘어온다.(<@=)
+
+
+2. connection pool 이용
+
+학번
+이름
+~증명서를 ~로 발급하였습니다.
+
+id, pw, 증명서(재학증명서, 성적증명서, 졸업증명서), 주소, 학번
+학번 ~님 증명서가 발급되엇습니다.
+
+E:\mysql-8.2.0-winx64\mysql-8.2.0-winx64\bin>mysqld start
+
+E:\mysql-8.2.0-winx64\mysql-8.2.0-winx64\bin>mysql -u root -p
